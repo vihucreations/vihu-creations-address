@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="hi">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Vihu Creations - Admin Panel</title>
+
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+
+  margin:0;
+
+  background:#f2f2f2;
+
+  font-family:Arial,sans-serif;
+
+  color:#222;
+
+}
+
+
+.panel{
+
+  max-width:850px;
+
+  margin:25px auto;
+
+  background:white;
+
+  padding:25px;
+
+  border-radius:16px;
+
+  box-shadow:0 4px 20px #0002;
+
+}
+
+
+.brand{
+
+  text-align:center;
+
+  font-size:28px;
+
+  font-weight:bold;
+
+}
+
+
+.tag{
+
+  text-align:center;
+
+  color:#777;
+
+  margin:5px 0 25px;
+
+}
+
+
+.search{
+
+  display:flex;
+
+  gap:10px;
+
+}
+
+
+.search input{
+
+  flex:1;
+
+  padding:14px;
+
+  font-size:18px;
+
+  border:1px solid #bbb;
+
+  border-radius:9px;
+
+}
+
+
+button{
+
+  border:0;
+
+  border-radius:9px;
+
+  padding:13px 18px;
+
+  background:#222;
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+}
+
+
+button:hover{
+
+  opacity:.85;
+
+}
+
+
+#message{
+
+  text-align:center;
+
+  margin:15px 0;
+
+  font-weight:bold;
+
+}
+
+
+.card{
+
+  display:none;
+
+  margin-top:20px;
+
+  border:1px solid #ddd;
+
+  border-radius:12px;
+
+  padding:20px;
+
+}
+
+
+.grid{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:15px;
+
+}
+
+
+.field{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:5px;
+
+}
+
+
+.field.full{
+
+  grid-column:1 / -1;
+
+}
+
+
+.field label{
+
+  font-weight:bold;
+
+}
+
+
+.field input,
+.field textarea{
+
+  width:100%;
+
+  padding:11px;
+
+  border:1px solid #bbb;
+
+  border-radius:7px;
+
+  font-size:16px;
+
+  font-family:Arial,sans-serif;
+
+}
+
+
+.field textarea{
+
+  min-height:70px;
+
+  resize:vertical;
+
+}
+
+
+.actions{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-top:20px;
+
+}
+
+
+.actions button{
+
+  flex:1;
+
+}
+
+
+.save{
+
+  background:#167a35;
+
+}
+
+
+.print{
+
+  background:#333;
+
+}
+
+
+.clear{
+
+  background:#777;
+
+}
+
+
+@media(max-width:600px){
+
+  .grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .field.full{
+
+    grid-column:auto;
+
+  }
+
+  .search,
+  .actions{
+
+    flex-direction:column;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="panel">
+
+
+<div class="brand">
+
+VIHU CREATIONS
+
+</div>
+
+
+<div class="tag">
+
+ADMIN PANEL
+
+</div>
+
+
+
+<!-- SEARCH -->
+
+<div class="search">
+
+<input
+  id="searchMobile"
+  type="tel"
+  maxlength="10"
+  placeholder="Enter Client Mobile Number">
+
+<button onclick="searchClient()">
+
+🔍 Search
+
+</button>
+
+</div>
+
+
+<div id="message"></div>
+
+
+
+<!-- CLIENT DETAILS -->
+
+<div class="card" id="clientCard">
+
+
+<div class="grid">
+
+
+<div class="field">
+
+<label>Name</label>
+
+<input id="name">
+
+</div>
+
+
+<div class="field">
+
+<label>Mobile</label>
+
+<input id="mobile">
+
+</div>
+
+
+<div class="field">
+
+<label>House / Flat</label>
+
+<input id="house">
+
+</div>
+
+
+<div class="field">
+
+<label>Area / Colony</label>
+
+<input id="area">
+
+</div>
+
+
+<div class="field full">
+
+<label>Full Address</label>
+
+<textarea id="address"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label>City</label>
+
+<input id="city">
+
+</div>
+
+
+<div class="field">
+
+<label>State</label>
+
+<input id="state">
+
+</div>
+
+
+<div class="field">
+
+<label>Pincode</label>
+
+<input id="pincode">
+
+</div>
+
+
+<div class="field">
+
+<label>Landmark</label>
+
+<input id="landmark">
+
+</div>
+
+
+<div class="field full">
+
+<label>Delivery Instructions</label>
+
+<textarea id="instructions"></textarea>
+
+</div>
+
+
+</div>
+
+
+
+<div class="actions">
+
+
+<button
+class="save"
+onclick="updateClient()">
+
+💾 Update Address
+
+</button>
+
+
+<button
+class="print"
+onclick="printLabel()">
+
+🖨 Print Label
+
+</button>
+
+
+<button
+class="clear"
+onclick="clearForm()">
+
+✖ Clear
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+const WEB_APP_URL =
+
+"https://script.google.com/macros/s/AKfycbzbuN7TQSV6SpAk68XIDMgGYSqSxjan66A2eGf4tEDGdxSAnmh8179ZIjEuE0kscK8N/exec";
+
+
+let currentRow = null;
+
+
+
+/* =========================
+   SEARCH CLIENT
+   ========================= */
+
+async function searchClient(){
+
+  const mobile =
+    document
+    .getElementById("searchMobile")
+    .value
+    .trim();
+
+
+  const message =
+    document.getElementById("message");
+
+
+  const card =
+    document.getElementById("clientCard");
+
+
+  if(mobile.length < 10){
+
+    message.textContent =
+      "Please enter 10 digit mobile number.";
+
+    card.style.display="none";
+
+    return;
+
+  }
+
+
+  message.textContent =
+    "Searching...";
+
+
+  card.style.display =
+    "none";
+
+
+  try{
+
+
+    const url =
+
+      WEB_APP_URL +
+
+      "?mobile=" +
+
+      encodeURIComponent(mobile);
+
+
+    const response =
+      await fetch(url);
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.found){
+
+      message.textContent =
+        "❌ Client not found.";
+
+      return;
+
+    }
+
+
+    const data =
+      result.data;
+
+
+    currentRow =
+      data["_rowNumber"];
+
+
+    document.getElementById("name").value =
+      data["Name"] || "";
+
+
+    document.getElementById("mobile").value =
+      data["Mobile"] || "";
+
+
+    document.getElementById("house").value =
+      data["House/Flat"] || "";
+
+
+    document.getElementById("area").value =
+      data["Area/Colony"] || "";
+
+
+    document.getElementById("address").value =
+      data["Full Address"] || "";
+
+
+    document.getElementById("city").value =
+      data["City"] || "";
+
+
+    document.getElementById("state").value =
+      data["State"] || "";
+
+
+    document.getElementById("pincode").value =
+      data["Pincode"] || "";
+
+
+    document.getElementById("landmark").value =
+      data["Landmark"] || "";
+
+
+    document.getElementById("instructions").value =
+      data["Instructions"] || "";
+
+
+    message.textContent =
+      "✓ Client Found";
+
+
+    card.style.display =
+      "block";
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      "❌ Search failed.";
+
+  }
+
+}
+
+
+
+/* =========================
+   UPDATE CLIENT
+   ========================= */
+
+async function updateClient(){
+
+  if(!currentRow){
+
+    alert("Please search a client first.");
+
+    return;
+
+  }
+
+
+  const message =
+    document.getElementById("message");
+
+
+  message.textContent =
+    "Updating...";
+
+
+  const data = {
+
+    action:"update",
+
+    rowNumber:currentRow,
+
+    name:
+      document.getElementById("name").value,
+
+    mobile:
+      document.getElementById("mobile").value,
+
+    houseFlat:
+      document.getElementById("house").value,
+
+    areaColony:
+      document.getElementById("area").value,
+
+    fullAddress:
+      document.getElementById("address").value,
+
+    city:
+      document.getElementById("city").value,
+
+    state:
+      document.getElementById("state").value,
+
+    pincode:
+      document.getElementById("pincode").value,
+
+    landmark:
+      document.getElementById("landmark").value,
+
+    instructions:
+      document.getElementById("instructions").value
+
+  };
+
+
+  try{
+
+
+    const response =
+      await fetch(
+
+        WEB_APP_URL,
+
+        {
+
+          method:"POST",
+
+          body:JSON.stringify(data)
+
+        }
+
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success){
+
+      message.textContent =
+        "✓ Address Updated Successfully";
+
+    }
+
+    else{
+
+      message.textContent =
+        "❌ Update failed.";
+
+    }
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      "❌ Update failed.";
+
+  }
+
+}
+
+
+
+/* =========================
+   PRINT LABEL
+   ========================= */
+
+function printLabel(){
+
+  if(!currentRow){
+
+    alert("Please search a client first.");
+
+    return;
+
+  }
+
+
+  const mobile =
+    document
+    .getElementById("mobile")
+    .value
+    .trim();
+
+
+  const shippingURL =
+
+    "shipping.html?mobile=" +
+
+    encodeURIComponent(mobile);
+
+
+  window.open(
+    shippingURL,
+    "_blank"
+  );
+
+}
+
+
+
+/* =========================
+   CLEAR
+   ========================= */
+
+function clearForm(){
+
+  currentRow = null;
+
+
+  document
+    .getElementById("clientCard")
+    .style.display="none";
+
+
+  document
+    .getElementById("message")
+    .textContent="";
+
+
+  document
+    .getElementById("searchMobile")
+    .value="";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
