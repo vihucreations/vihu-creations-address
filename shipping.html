@@ -127,26 +127,12 @@ button:disabled{
   margin-bottom:12px;
 }
 
-.ship-from{
-  border-top:2px solid #222;
-  border-bottom:1px solid #777;
-  padding:8px 0;
-  margin-bottom:10px;
-  font-size:15px;
-  line-height:1.35;
-}
-
-.ship-from-title{
-  font-size:17px;
-  font-weight:bold;
-  margin-bottom:3px;
-}
-
 .ship-to{
+  border-top:2px solid #222;
   border-bottom:2px solid #222;
   padding:8px 0;
-  margin-bottom:12px;
-  font-size:18px;
+  margin-bottom:10px;
+  font-size:17px;
   font-weight:bold;
 }
 
@@ -166,6 +152,22 @@ button:disabled{
   padding-top:10px;
   border-top:1px dashed #555;
   font-size:14px;
+  margin-bottom:12px;
+}
+
+.ship-from{
+  border-top:2px solid #222;
+  border-bottom:1px solid #777;
+  padding:8px 0;
+  font-size:15px;
+  line-height:1.35;
+  margin-top:12px;
+}
+
+.ship-from-title{
+  font-size:17px;
+  font-weight:bold;
+  margin-bottom:3px;
 }
 
 @media(max-width:550px){
@@ -302,27 +304,27 @@ button:disabled{
 <div class="label-brand">VIHU CREATIONS</div>
 <div class="label-tag">A Brand of Creativity</div>
 
-<div class="ship-from">
 
-<div class="ship-from-title">SHIP FROM</div>
+<!-- SHIP TO FIRST -->
 
-<strong>VIHU CREATIONS</strong><br>
-B-23 MIG VINOBA NAGAR<br>
-NEAR GURUDWARA, RATLAM - 457001<br>
-<strong>MOBILE NO. - 9343627127</strong>
-
+<div class="ship-to">
+SHIP TO
 </div>
 
-<div class="ship-to">SHIP TO</div>
-
 <div class="address">
+
 <strong id="pname1"></strong><br>
+
 <span id="phouse1"></span><br>
+
 <span id="parea1"></span><br>
+
 <span id="paddress1"></span><br>
+
 <span id="pcity1"></span>,
 <span id="pstate1"></span>
 - <strong id="ppincode1"></strong>
+
 </div>
 
 <div class="mobile">
@@ -330,11 +332,34 @@ NEAR GURUDWARA, RATLAM - 457001<br>
 </div>
 
 <div class="instructions">
+
 <strong>Landmark:</strong>
 <span id="plandmark1"></span>
+
 <br>
+
 <strong>Delivery Instructions:</strong>
 <span id="pinstructions1"></span>
+
+</div>
+
+
+<!-- SHIP FROM -->
+
+<div class="ship-from">
+
+<div class="ship-from-title">
+SHIP FROM
+</div>
+
+<strong>VIHU CREATIONS</strong><br>
+
+B-23 MIG VINOBA NAGAR<br>
+
+NEAR GURUDWARA, RATLAM - 457001<br>
+
+<strong>MOBILE NO. - 9343627127</strong>
+
 </div>
 
 </div>
@@ -347,27 +372,27 @@ NEAR GURUDWARA, RATLAM - 457001<br>
 <div class="label-brand">VIHU CREATIONS</div>
 <div class="label-tag">A Brand of Creativity</div>
 
-<div class="ship-from">
 
-<div class="ship-from-title">SHIP FROM</div>
+<!-- SHIP TO FIRST -->
 
-<strong>VIHU CREATIONS</strong><br>
-B-23 MIG VINOBA NAGAR<br>
-NEAR GURUDWARA, RATLAM - 457001<br>
-<strong>MOBILE NO. - 9343627127</strong>
-
+<div class="ship-to">
+SHIP TO
 </div>
 
-<div class="ship-to">SHIP TO</div>
-
 <div class="address">
+
 <strong id="pname2"></strong><br>
+
 <span id="phouse2"></span><br>
+
 <span id="parea2"></span><br>
+
 <span id="paddress2"></span><br>
+
 <span id="pcity2"></span>,
 <span id="pstate2"></span>
 - <strong id="ppincode2"></strong>
+
 </div>
 
 <div class="mobile">
@@ -375,11 +400,34 @@ NEAR GURUDWARA, RATLAM - 457001<br>
 </div>
 
 <div class="instructions">
+
 <strong>Landmark:</strong>
 <span id="plandmark2"></span>
+
 <br>
+
 <strong>Delivery Instructions:</strong>
 <span id="pinstructions2"></span>
+
+</div>
+
+
+<!-- SHIP FROM -->
+
+<div class="ship-from">
+
+<div class="ship-from-title">
+SHIP FROM
+</div>
+
+<strong>VIHU CREATIONS</strong><br>
+
+B-23 MIG VINOBA NAGAR<br>
+
+NEAR GURUDWARA, RATLAM - 457001<br>
+
+<strong>MOBILE NO. - 9343627127</strong>
+
 </div>
 
 </div>
@@ -524,6 +572,7 @@ function fillLabel(n){
 
   document.getElementById("pinstructions"+n).textContent =
     currentData["Instructions"] || "";
+
 }
 
 
