@@ -7,7 +7,10 @@
 <title>Vihu Creations - Shipping Label</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -127,6 +130,9 @@ button:disabled{
   margin-bottom:12px;
 }
 
+
+/* SHIP TO */
+
 .ship-to{
   border-top:2px solid #222;
   border-bottom:2px solid #222;
@@ -155,13 +161,16 @@ button:disabled{
   margin-bottom:12px;
 }
 
+
+/* SHIP FROM */
+
 .ship-from{
   border-top:2px solid #222;
   border-bottom:1px solid #777;
   padding:8px 0;
+  margin-top:10px;
   font-size:15px;
   line-height:1.35;
-  margin-top:12px;
 }
 
 .ship-from-title{
@@ -170,18 +179,42 @@ button:disabled{
   margin-bottom:3px;
 }
 
+
+/* MOBILE */
+
 @media(max-width:550px){
+
   .search,
   .actions{
     flex-direction:column;
   }
+
 }
 
-/* PRINT */
+
+/* =========================
+   PRINT - A4 SINGLE PAGE
+   2 LABELS ON ONE PAGE
+   ========================= */
+
 @media print{
 
+  html,
   body{
+    width:210mm;
+    height:297mm;
+    margin:0 !important;
+    padding:0 !important;
     background:white;
+  }
+
+  .panel{
+    width:210mm;
+    max-width:none;
+    margin:0 !important;
+    padding:0 !important;
+    box-shadow:none;
+    border-radius:0;
   }
 
   .panel > *:not(.label-preview){
@@ -190,33 +223,105 @@ button:disabled{
 
   .label-preview{
     display:block !important;
+    width:190mm;
+    height:277mm;
+    margin:0 auto !important;
+    padding:0 !important;
   }
 
   .label{
-    height:48%;
-    min-height:0;
-    margin:0 0 2% 0;
+    width:190mm;
+    height:135mm;
+    min-height:135mm;
+
+    margin:0 0 7mm 0 !important;
+    padding:8mm;
+
+    border:2px solid #222;
+
     page-break-inside:avoid;
+    break-inside:avoid;
   }
 
-  .label:nth-child(2){
-    margin-bottom:0;
+  .label:last-child{
+    margin-bottom:0 !important;
+  }
+
+
+  /* PRINT FONT SIZES */
+
+  .label-brand{
+    font-size:21px;
+  }
+
+  .label-tag{
+    font-size:11px;
+    margin-bottom:6px;
+  }
+
+  .ship-to{
+    padding:5px 0;
+    margin-bottom:6px;
+    font-size:15px;
+  }
+
+  .address{
+    font-size:15px;
+    line-height:1.3;
+  }
+
+  .mobile{
+    margin-top:6px;
+    font-size:15px;
+  }
+
+  .instructions{
+    margin-top:7px;
+    padding-top:5px;
+    font-size:12px;
+    margin-bottom:7px;
+  }
+
+  .ship-from{
+    margin-top:7px;
+    padding:5px 0;
+    font-size:12px;
+    line-height:1.25;
+  }
+
+  .ship-from-title{
+    font-size:14px;
+    margin-bottom:2px;
   }
 
   @page{
     size:A4 portrait;
     margin:10mm;
   }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="panel">
 
-<div class="brand">VIHU CREATIONS</div>
-<div class="tag">A Brand of Creativity</div>
+
+<!-- BRAND -->
+
+<div class="brand">
+VIHU CREATIONS
+</div>
+
+<div class="tag">
+A Brand of Creativity
+</div>
+
+
+<!-- SEARCH -->
 
 <div class="search">
 
@@ -226,90 +331,128 @@ button:disabled{
   maxlength="10"
   placeholder="Enter Mobile Number">
 
-<button onclick="searchAddress()">🔍 Search</button>
+<button onclick="searchAddress()">
+🔍 Search
+</button>
 
 </div>
 
+
 <div id="message"></div>
 
+
+<!-- DETAILS -->
+
 <div class="details" id="details">
+
 
 <div class="field">
 <b>Name</b>
 <div class="value" id="name"></div>
 </div>
 
+
 <div class="field">
 <b>Mobile</b>
 <div class="value" id="mobileShow"></div>
 </div>
+
 
 <div class="field">
 <b>House / Flat</b>
 <div class="value" id="house"></div>
 </div>
 
+
 <div class="field">
 <b>Area / Colony</b>
 <div class="value" id="area"></div>
 </div>
+
 
 <div class="field">
 <b>Full Address</b>
 <div class="value" id="address"></div>
 </div>
 
+
 <div class="field">
 <b>City</b>
 <div class="value" id="city"></div>
 </div>
+
 
 <div class="field">
 <b>State</b>
 <div class="value" id="state"></div>
 </div>
 
+
 <div class="field">
 <b>Pincode</b>
 <div class="value" id="pincode"></div>
 </div>
+
 
 <div class="field">
 <b>Landmark</b>
 <div class="value" id="landmark"></div>
 </div>
 
+
 <div class="field">
 <b>Delivery Instructions</b>
 <div class="value" id="instructions"></div>
 </div>
 
+
+<!-- BUTTONS -->
+
 <div class="actions">
 
-<button onclick="showPreview()">👁 Preview Label</button>
+<button onclick="showPreview()">
+👁 Preview Label
+</button>
 
-<button onclick="window.print()">🖨 Print A4 – 2 Labels</button>
+<button onclick="window.print()">
+🖨 Print A4 – 2 Labels
+</button>
 
 </div>
 
 </div>
 
+
+
+<!-- =========================
+     LABEL PREVIEW
+     ========================= -->
 
 <div class="label-preview" id="preview">
 
-<!-- LABEL 1 -->
+
+<!-- =========================
+     LABEL 1
+     ========================= -->
 
 <div class="label">
 
-<div class="label-brand">VIHU CREATIONS</div>
-<div class="label-tag">A Brand of Creativity</div>
+
+<div class="label-brand">
+VIHU CREATIONS
+</div>
+
+<div class="label-tag">
+A Brand of Creativity
+</div>
 
 
-<!-- SHIP TO FIRST -->
+<!-- SHIP TO -->
 
 <div class="ship-to">
 SHIP TO
 </div>
+
 
 <div class="address">
 
@@ -323,13 +466,16 @@ SHIP TO
 
 <span id="pcity1"></span>,
 <span id="pstate1"></span>
-- <strong id="ppincode1"></strong>
+-
+<strong id="ppincode1"></strong>
 
 </div>
+
 
 <div class="mobile">
 📞 <span id="pmobile1"></span>
 </div>
+
 
 <div class="instructions">
 
@@ -358,26 +504,38 @@ B-23 MIG VINOBA NAGAR<br>
 
 NEAR GURUDWARA, RATLAM - 457001<br>
 
-<strong>MOBILE NO. - 9343627127</strong>
+<strong>
+MOBILE NO. - 9343627127
+</strong>
 
 </div>
 
 </div>
 
 
-<!-- LABEL 2 -->
+
+<!-- =========================
+     LABEL 2
+     ========================= -->
 
 <div class="label">
 
-<div class="label-brand">VIHU CREATIONS</div>
-<div class="label-tag">A Brand of Creativity</div>
+
+<div class="label-brand">
+VIHU CREATIONS
+</div>
+
+<div class="label-tag">
+A Brand of Creativity
+</div>
 
 
-<!-- SHIP TO FIRST -->
+<!-- SHIP TO -->
 
 <div class="ship-to">
 SHIP TO
 </div>
+
 
 <div class="address">
 
@@ -391,13 +549,16 @@ SHIP TO
 
 <span id="pcity2"></span>,
 <span id="pstate2"></span>
-- <strong id="ppincode2"></strong>
+-
+<strong id="ppincode2"></strong>
 
 </div>
+
 
 <div class="mobile">
 📞 <span id="pmobile2"></span>
 </div>
+
 
 <div class="instructions">
 
@@ -426,7 +587,9 @@ B-23 MIG VINOBA NAGAR<br>
 
 NEAR GURUDWARA, RATLAM - 457001<br>
 
-<strong>MOBILE NO. - 9343627127</strong>
+<strong>
+MOBILE NO. - 9343627127
+</strong>
 
 </div>
 
@@ -435,9 +598,13 @@ NEAR GURUDWARA, RATLAM - 457001<br>
 </div>
 
 </div>
+
 
 
 <script>
+
+
+/* GOOGLE APPS SCRIPT */
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbzbuN7TQSV6SpAk68XIDMgGYSqSxjan66A2eGf4tEDGdxSAnmh8179ZIjEuE0kscK8N/exec";
@@ -445,6 +612,11 @@ const WEB_APP_URL =
 
 let currentData = null;
 
+
+
+/* =========================
+   SEARCH ADDRESS
+   ========================= */
 
 async function searchAddress(){
 
@@ -457,6 +629,7 @@ async function searchAddress(){
   const details =
     document.getElementById("details");
 
+
   if(mobile.length < 10){
 
     message.textContent =
@@ -467,8 +640,13 @@ async function searchAddress(){
     return;
   }
 
-  message.textContent="Searching...";
-  details.style.display="none";
+
+  message.textContent =
+    "Searching...";
+
+  details.style.display =
+    "none";
+
 
   try{
 
@@ -477,11 +655,14 @@ async function searchAddress(){
       "?mobile=" +
       encodeURIComponent(mobile);
 
+
     const response =
       await fetch(url);
 
+
     const result =
       await response.json();
+
 
     if(!result.found){
 
@@ -491,44 +672,63 @@ async function searchAddress(){
       return;
     }
 
-    currentData=result.data;
+
+    currentData =
+      result.data;
+
+
+    /* DETAILS */
 
     document.getElementById("name").textContent =
       currentData["Name"] || "";
 
+
     document.getElementById("mobileShow").textContent =
       currentData["Mobile"] || "";
+
 
     document.getElementById("house").textContent =
       currentData["House/Flat"] || "";
 
+
     document.getElementById("area").textContent =
       currentData["Area/Colony"] || "";
+
 
     document.getElementById("address").textContent =
       currentData["Full Address"] || "";
 
+
     document.getElementById("city").textContent =
       currentData["City"] || "";
+
 
     document.getElementById("state").textContent =
       currentData["State"] || "";
 
+
     document.getElementById("pincode").textContent =
       currentData["Pincode"] || "";
+
 
     document.getElementById("landmark").textContent =
       currentData["Landmark"] || "";
 
+
     document.getElementById("instructions").textContent =
       currentData["Instructions"] || "";
+
 
     message.textContent =
       "✓ Address Found";
 
-    details.style.display="block";
+
+    details.style.display =
+      "block";
+
 
     showPreview();
+
 
   }catch(error){
 
@@ -538,37 +738,52 @@ async function searchAddress(){
     console.error(error);
 
   }
+
 }
 
+
+
+/* =========================
+   FILL LABEL
+   ========================= */
 
 function fillLabel(n){
 
   document.getElementById("pname"+n).textContent =
     currentData["Name"] || "";
 
+
   document.getElementById("phouse"+n).textContent =
     currentData["House/Flat"] || "";
+
 
   document.getElementById("parea"+n).textContent =
     currentData["Area/Colony"] || "";
 
+
   document.getElementById("paddress"+n).textContent =
     currentData["Full Address"] || "";
+
 
   document.getElementById("pcity"+n).textContent =
     currentData["City"] || "";
 
+
   document.getElementById("pstate"+n).textContent =
     currentData["State"] || "";
+
 
   document.getElementById("ppincode"+n).textContent =
     currentData["Pincode"] || "";
 
+
   document.getElementById("pmobile"+n).textContent =
     currentData["Mobile"] || "";
 
+
   document.getElementById("plandmark"+n).textContent =
     currentData["Landmark"] || "";
+
 
   document.getElementById("pinstructions"+n).textContent =
     currentData["Instructions"] || "";
@@ -576,14 +791,25 @@ function fillLabel(n){
 }
 
 
+
+/* =========================
+   PREVIEW
+   ========================= */
+
 function showPreview(){
 
-  if(!currentData) return;
+  if(!currentData){
+    return;
+  }
+
 
   fillLabel(1);
+
   fillLabel(2);
 
-  document.getElementById("preview").style.display="block";
+
+  document.getElementById("preview").style.display =
+    "block";
 
 }
 
