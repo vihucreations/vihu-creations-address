@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Vihu Creations - Shipping Label</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#f2f2f2;
+  font-family:Arial,sans-serif;
+  color:#222;
+}
+
+.panel{
+  max-width:700px;
+  margin:25px auto;
+  background:white;
+  padding:22px;
+  border-radius:16px;
+  box-shadow:0 4px 20px #0002;
+}
+
+.brand{
+  text-align:center;
+  font-size:28px;
+  font-weight:bold;
+}
+
+.tag{
+  text-align:center;
+  color:#777;
+  margin:4px 0 20px;
+}
+
+.search{
+  display:flex;
+  gap:10px;
+}
+
+.search input{
+  flex:1;
+  padding:14px;
+  font-size:18px;
+  border:1px solid #bbb;
+  border-radius:9px;
+}
+
+button{
+  padding:13px 18px;
+  border:0;
+  border-radius:9px;
+  background:#222;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.5;
+}
+
+#message{
+  margin-top:15px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.details{
+  display:none;
+  margin-top:20px;
+}
+
+.field{
+  margin:10px 0;
+}
+
+.field b{
+  display:block;
+  margin-bottom:3px;
+}
+
+.value{
+  background:#f7f7f7;
+  padding:9px;
+  border-radius:6px;
+  min-height:20px;
+}
+
+.actions{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+}
+
+.actions button{
+  flex:1;
+}
+
+.label-preview{
+  display:none;
+}
+
+.label{
+  width:100%;
+  min-height:390px;
+  border:2px solid #222;
+  padding:22px;
+  margin:15px 0;
+  background:white;
+}
+
+.label-brand{
+  text-align:center;
+  font-size:25px;
+  font-weight:bold;
+}
+
+.label-tag{
+  text-align:center;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.ship{
+  border-top:2px solid #222;
+  border-bottom:2px solid #222;
+  padding:10px 0;
+  margin-bottom:12px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.address{
+  font-size:18px;
+  line-height:1.5;
+}
+
+.mobile{
+  margin-top:12px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.instructions{
+  margin-top:14px;
+  padding-top:10px;
+  border-top:1px dashed #555;
+  font-size:14px;
+}
+
+@media(max-width:550px){
+  .search,
+  .actions{
+    flex-direction:column;
+  }
+}
+
+/* PRINT */
+@media print{
+
+  body{
+    background:white;
+  }
+
+  .panel > *:not(.label-preview){
+    display:none !important;
+  }
+
+  .label-preview{
+    display:block !important;
+  }
+
+  .label{
+    height:48%;
+    min-height:0;
+    margin:0 0 2% 0;
+    page-break-inside:avoid;
+  }
+
+  .label:nth-child(2){
+    margin-bottom:0;
+  }
+
+  @page{
+    size:A4 portrait;
+    margin:10mm;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+<div class="brand">VIHU CREATIONS</div>
+<div class="tag">A Brand of Creativity</div>
+
+<div class="search">
+
+<input
+  id="mobile"
+  type="tel"
+  maxlength="10"
+  placeholder="Enter Mobile Number">
+
+<button onclick="searchAddress()">🔍 Search</button>
+
+</div>
+
+<div id="message"></div>
+
+<div class="details" id="details">
+
+<div class="field">
+<b>Name</b>
+<div class="value" id="name"></div>
+</div>
+
+<div class="field">
+<b>Mobile</b>
+<div class="value" id="mobileShow"></div>
+</div>
+
+<div class="field">
+<b>House / Flat</b>
+<div class="value" id="house"></div>
+</div>
+
+<div class="field">
+<b>Area / Colony</b>
+<div class="value" id="area"></div>
+</div>
+
+<div class="field">
+<b>Full Address</b>
+<div class="value" id="address"></div>
+</div>
+
+<div class="field">
+<b>City</b>
+<div class="value" id="city"></div>
+</div>
+
+<div class="field">
+<b>State</b>
+<div class="value" id="state"></div>
+</div>
+
+<div class="field">
+<b>Pincode</b>
+<div class="value" id="pincode"></div>
+</div>
+
+<div class="field">
+<b>Landmark</b>
+<div class="value" id="landmark"></div>
+</div>
+
+<div class="field">
+<b>Delivery Instructions</b>
+<div class="value" id="instructions"></div>
+</div>
+
+<div class="actions">
+
+<button onclick="showPreview()">👁 Preview Label</button>
+
+<button onclick="window.print()">🖨 Print A4 – 2 Labels</button>
+
+</div>
+
+</div>
+
+
+<div class="label-preview" id="preview">
+
+<div class="label">
+
+<div class="label-brand">VIHU CREATIONS</div>
+<div class="label-tag">A Brand of Creativity</div>
+
+<div class="ship">SHIP TO</div>
+
+<div class="address">
+<strong id="pname1"></strong><br>
+<span id="phouse1"></span><br>
+<span id="parea1"></span><br>
+<span id="paddress1"></span><br>
+<span id="pcity1"></span>,
+<span id="pstate1"></span>
+- <strong id="ppincode1"></strong>
+</div>
+
+<div class="mobile">
+📞 <span id="pmobile1"></span>
+</div>
+
+<div class="instructions">
+<strong>Landmark:</strong>
+<span id="plandmark1"></span>
+<br>
+<strong>Delivery Instructions:</strong>
+<span id="pinstructions1"></span>
+</div>
+
+</div>
+
+
+<div class="label">
+
+<div class="label-brand">VIHU CREATIONS</div>
+<div class="label-tag">A Brand of Creativity</div>
+
+<div class="ship">SHIP TO</div>
+
+<div class="address">
+<strong id="pname2"></strong><br>
+<span id="phouse2"></span><br>
+<span id="parea2"></span><br>
+<span id="paddress2"></span><br>
+<span id="pcity2"></span>,
+<span id="pstate2"></span>
+- <strong id="ppincode2"></strong>
+</div>
+
+<div class="mobile">
+📞 <span id="pmobile2"></span>
+</div>
+
+<div class="instructions">
+<strong>Landmark:</strong>
+<span id="plandmark2"></span>
+<br>
+<strong>Delivery Instructions:</strong>
+<span id="pinstructions2"></span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbzbuN7TQSV6SpAk68XIDMgGYSqSxjan66A2eGf4tEDGdxSAnmh8179ZIjEuE0kscK8N/exec";
+
+
+let currentData = null;
+
+
+async function searchAddress(){
+
+  const mobile =
+    document.getElementById("mobile").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+  const details =
+    document.getElementById("details");
+
+  if(mobile.length < 10){
+
+    message.textContent =
+      "Please enter 10 digit mobile number.";
+
+    details.style.display="none";
+
+    return;
+  }
+
+  message.textContent="Searching...";
+  details.style.display="none";
+
+  try{
+
+    const url =
+      WEB_APP_URL +
+      "?mobile=" +
+      encodeURIComponent(mobile);
+
+    const response =
+      await fetch(url);
+
+    const result =
+      await response.json();
+
+    if(!result.found){
+
+      message.textContent =
+        "❌ Address not found.";
+
+      return;
+    }
+
+    currentData=result.data;
+
+    document.getElementById("name").textContent =
+      currentData["Name"] || "";
+
+    document.getElementById("mobileShow").textContent =
+      currentData["Mobile"] || "";
+
+    document.getElementById("house").textContent =
+      currentData["House/Flat"] || "";
+
+    document.getElementById("area").textContent =
+      currentData["Area/Colony"] || "";
+
+    document.getElementById("address").textContent =
+      currentData["Full Address"] || "";
+
+    document.getElementById("city").textContent =
+      currentData["City"] || "";
+
+    document.getElementById("state").textContent =
+      currentData["State"] || "";
+
+    document.getElementById("pincode").textContent =
+      currentData["Pincode"] || "";
+
+    document.getElementById("landmark").textContent =
+      currentData["Landmark"] || "";
+
+    document.getElementById("instructions").textContent =
+      currentData["Instructions"] || "";
+
+    message.textContent =
+      "✓ Address Found";
+
+    details.style.display="block";
+
+    showPreview();
+
+  }catch(error){
+
+    message.textContent =
+      "❌ Search failed. Please try again.";
+
+    console.error(error);
+
+  }
+}
+
+
+function fillLabel(n){
+
+  document.getElementById("pname"+n).textContent =
+    currentData["Name"] || "";
+
+  document.getElementById("phouse"+n).textContent =
+    currentData["House/Flat"] || "";
+
+  document.getElementById("parea"+n).textContent =
+    currentData["Area/Colony"] || "";
+
+  document.getElementById("paddress"+n).textContent =
+    currentData["Full Address"] || "";
+
+  document.getElementById("pcity"+n).textContent =
+    currentData["City"] || "";
+
+  document.getElementById("pstate"+n).textContent =
+    currentData["State"] || "";
+
+  document.getElementById("ppincode"+n).textContent =
+    currentData["Pincode"] || "";
+
+  document.getElementById("pmobile"+n).textContent =
+    currentData["Mobile"] || "";
+
+  document.getElementById("plandmark"+n).textContent =
+    currentData["Landmark"] || "";
+
+  document.getElementById("pinstructions"+n).textContent =
+    currentData["Instructions"] || "";
+}
+
+
+function showPreview(){
+
+  if(!currentData) return;
+
+  fillLabel(1);
+  fillLabel(2);
+
+  document.getElementById("preview").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
