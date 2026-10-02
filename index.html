@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>VIHU CREATIONS - Address Form</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -123,127 +128,305 @@ button:disabled{
   font-size:12px;
   color:#888;
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
 
   <div class="logo">
     VIHU CREATIONS
   </div>
+
 
   <div class="tagline">
     A Brand of Creativity
   </div>
 
 
+
+  <!-- FORM -->
+
   <div id="fbox">
 
     <h2>Delivery Address</h2>
 
-    <form id="f">
+
+    <form
+      id="f"
+      method="POST"
+      target="addressSubmitFrame"
+    >
+
+
+      <!-- ACTION -->
+
+      <input
+        type="hidden"
+        name="action"
+        value="saveAddress"
+      >
+
 
       <div class="form-group">
-        <label>Name <span class="required">*</span></label>
-        <input type="text" name="name" required>
+
+        <label>
+          Name <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="name"
+          required
+        >
+
       </div>
 
+
+
       <div class="form-group">
-        <label>Mobile Number <span class="required">*</span></label>
+
+        <label>
+          Mobile Number <span class="required">*</span>
+        </label>
+
         <input
           type="tel"
           name="mobile"
           maxlength="10"
           pattern="[0-9]{10}"
-          required>
+          required
+        >
+
       </div>
 
-      <div class="form-group">
-        <label>House / Flat / Shop</label>
-        <input type="text" name="houseFlat">
-      </div>
+
 
       <div class="form-group">
-        <label>Area / Colony <span class="required">*</span></label>
-        <input type="text" name="areaColony" required>
+
+        <label>
+          House / Flat / Shop
+        </label>
+
+        <input
+          type="text"
+          name="houseFlat"
+        >
+
       </div>
 
-      <div class="form-group">
-        <label>Full Address <span class="required">*</span></label>
-        <textarea name="fullAddress" required></textarea>
-      </div>
+
 
       <div class="form-group">
-        <label>City <span class="required">*</span></label>
-        <input type="text" name="city" required>
+
+        <label>
+          Area / Colony
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="areaColony"
+          required
+        >
+
       </div>
 
-      <div class="form-group">
-        <label>State <span class="required">*</span></label>
-        <input type="text" name="state" required>
-      </div>
+
 
       <div class="form-group">
-        <label>Pincode <span class="required">*</span></label>
+
+        <label>
+          Full Address
+          <span class="required">*</span>
+        </label>
+
+        <textarea
+          name="fullAddress"
+          required
+        ></textarea>
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          City
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="city"
+          required
+        >
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          State
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="state"
+          required
+        >
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Pincode
+          <span class="required">*</span>
+        </label>
+
         <input
           type="text"
           name="pincode"
           maxlength="6"
           pattern="[0-9]{6}"
-          required>
+          required
+        >
+
       </div>
+
+
 
       <div class="form-group">
-        <label>Landmark</label>
-        <input type="text" name="landmark">
+
+        <label>
+          Landmark
+        </label>
+
+        <input
+          type="text"
+          name="landmark"
+        >
+
       </div>
+
+
 
       <div class="form-group">
-        <label>Delivery Instructions</label>
-        <textarea name="instructions"></textarea>
+
+        <label>
+          Delivery Instructions
+        </label>
+
+        <textarea
+          name="instructions"
+        ></textarea>
+
       </div>
 
-      <button type="submit" id="b">
+
+
+      <button
+        type="submit"
+        id="b"
+      >
         Submit Address
       </button>
 
+
     </form>
 
+
+
     <div class="note">
-      Please check your address and mobile number carefully before submitting.
+
+      Please check your address and mobile number
+      carefully before submitting.
+
     </div>
+
 
   </div>
 
 
-  <div class="success" id="ok">
 
-    <div class="success-icon">✅</div>
+  <!-- SUCCESS -->
 
-    <h2>Address Submitted Successfully</h2>
+  <div
+    class="success"
+    id="ok"
+  >
+
+    <div class="success-icon">
+      ✅
+    </div>
+
+    <h2>
+      Address Submitted Successfully
+    </h2>
 
     <p>
-      Thank you! Your delivery address has been received by
+
+      Thank you!
+
+      Your delivery address has been received by
+
       <b>VIHU CREATIONS</b>.
+
     </p>
 
   </div>
 
 
+
   <div class="footer">
+
     © VIHU CREATIONS
+
   </div>
+
 
 </div>
 
 
+
+<!-- HIDDEN IFRAME -->
+
+<iframe
+  name="addressSubmitFrame"
+  id="addressSubmitFrame"
+  style="display:none;"
+></iframe>
+
+
+
 <script>
+
+
+/* =========================================
+   GOOGLE APPS SCRIPT WEB APP
+   ========================================= */
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbzzNwe3PYbnRe8Gd0kMi7vkx49P5jZ4wy4_X5Xy8p8rUNg5jLQ24jw7Q4sG3eyQlswQ/exec";
 
+
+
+/* =========================================
+   ELEMENTS
+   ========================================= */
 
 const form =
 document.getElementById("f");
@@ -258,87 +441,80 @@ const successBox =
 document.getElementById("ok");
 
 
-form.addEventListener("submit", function(e){
 
-  e.preventDefault();
+/* =========================================
+   FORM SUBMIT
+   ========================================= */
 
-  button.disabled = true;
-  button.textContent = "Submitting...";
+form.addEventListener(
+  "submit",
+  function(e){
 
-
-  const formData =
-    new FormData(form);
-
-
-  const params =
-    new URLSearchParams();
+    e.preventDefault();
 
 
-  params.append(
-    "action",
-    "saveAddress"
-  );
+    /* Button disable */
+
+    button.disabled = true;
+
+    button.textContent =
+      "Submitting...";
 
 
-  formData.forEach(function(value,key){
+    /* Apps Script URL */
 
-    params.append(
-      key,
-      value
+    form.action =
+      WEB_APP_URL;
+
+
+    /*
+      IMPORTANT:
+      POST request directly
+      Apps Script doPost() par
+    */
+
+    form.method =
+      "POST";
+
+
+    form.target =
+      "addressSubmitFrame";
+
+
+    /*
+      Actual submit
+    */
+
+    form.submit();
+
+
+
+    /*
+      Server ko data save karne
+      ka thoda time
+    */
+
+    setTimeout(
+      function(){
+
+        formBox.style.display =
+          "none";
+
+        successBox.style.display =
+          "block";
+
+      },
+      2000
     );
 
-  });
 
+  }
+);
 
-  const url =
-    WEB_APP_URL +
-    "?" +
-    params.toString();
-
-
-  fetch(url)
-    .then(function(response){
-
-      return response.json();
-
-    })
-    .then(function(result){
-
-      if(result.success){
-
-        formBox.style.display = "none";
-
-        successBox.style.display = "block";
-
-      }else{
-
-        throw new Error(
-          result.error ||
-          result.message ||
-          "Address save failed"
-        );
-
-      }
-
-    })
-    .catch(function(error){
-
-      console.error(error);
-
-      alert(
-        "Address save nahi hua. Please try again."
-      );
-
-      button.disabled = false;
-
-      button.textContent =
-        "Submit Address";
-
-    });
-
-});
 
 </script>
 
+
 </body>
+
 </html>
