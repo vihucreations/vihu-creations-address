@@ -371,8 +371,13 @@ button:disabled{
 
 <script>
 
+/* =========================================================
+   VIHU CREATIONS
+   CURRENT GOOGLE APPS SCRIPT WEB APP - VERSION 64
+   ========================================================= */
+
 const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbzzNwe3PYbnRe8Gd0kMi7vkx49P5jZ4wy4_X5Xy8p8rUNg5jLQ24jw7Q4sG3eyQlswQ/exec";
+"https://script.google.com/macros/s/AKfycbys0SkJycxU_4dhrUHPNjKPOtBiqj6jWMVP2OW7zkGVxD-UQuxQLuH2ZU3dFYfHkHsh/exec";
 
 
 const form =
@@ -394,12 +399,14 @@ form.addEventListener(
 
     e.preventDefault();
 
+    /* Disable button */
     button.disabled = true;
 
     button.textContent =
       "Submitting...";
 
 
+    /* Current Apps Script URL */
     form.action =
       WEB_APP_URL;
 
@@ -410,8 +417,14 @@ form.addEventListener(
       "addressSubmitFrame";
 
 
+    /* Submit form */
     form.submit();
 
+
+    /*
+      Wait for Apps Script submission.
+      Then show success screen.
+    */
 
     setTimeout(
       function(){
@@ -423,7 +436,7 @@ form.addEventListener(
           "block";
 
       },
-      2000
+      2500
     );
 
   }
