@@ -198,46 +198,44 @@ form.addEventListener("submit", async function(e){
 
   e.preventDefault();
 
+  <script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbzzNwe3PYbnRe8Gd0kMi7vkx49P5jZ4wy4_X5Xy8p8rUNg5jLQ24jw7Q4sG3eyQlswQ/exec";
+
+const form = document.getElementById("f");
+const button = document.getElementById("b");
+const formBox = document.getElementById("fbox");
+const successBox = document.getElementById("ok");
+
+form.addEventListener("submit", function(e){
+
+  e.preventDefault();
+
   button.disabled = true;
   button.textContent = "Submitting...";
 
-  try{
+  // Normal browser POST to Google Apps Script
+  form.action = WEB_APP_URL;
+  form.method = "POST";
+  form.target = "hiddenSubmitFrame";
 
-    const formData = new FormData(form);
+  form.submit();
 
-    const params = new URLSearchParams();
-
-    formData.forEach(function(value,key){
-      params.append(key,value);
-    });
-
-    await fetch(WEB_APP_URL,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{
-        "Content-Type":
-        "application/x-www-form-urlencoded;charset=UTF-8"
-      },
-      body:params.toString()
-    });
+  // Show success after submission
+  setTimeout(function(){
 
     formBox.style.display = "none";
     successBox.style.display = "block";
 
-  }catch(error){
-
-    console.error("Submit error:",error);
-
-    alert("Submit failed. Please try again.");
-
-    button.disabled = false;
-    button.textContent = "Submit Address";
-
-  }
+  }, 1500);
 
 });
 
 </script>
 
-</body>
-</html>
+<iframe
+  name="hiddenSubmitFrame"
+  id="hiddenSubmitFrame"
+  style="display:none;width:0;height:0;border:0;">
+</iframe>
