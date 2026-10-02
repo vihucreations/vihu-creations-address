@@ -1,91 +1,162 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vihu Creations – Address</title>
+<title>VIHU CREATIONS - Address Form</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
-  background:#f4f4f4;
-  font-family:Arial,sans-serif
-}
-
-.box{
-  max-width:600px;
-  margin:18px auto;
   padding:20px;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
+  color:#222;
+}
+
+.container{
+  max-width:650px;
+  margin:auto;
   background:#fff;
-  border-radius:18px;
-  box-shadow:0 4px 18px #0002
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
 }
 
-.brand{
+.logo{
   text-align:center;
-  font-size:25px;
-  font-weight:bold
+  font-size:28px;
+  font-weight:bold;
+  letter-spacing:1px;
+  color:#8b5a2b;
+  margin-bottom:5px;
 }
 
-.tag{
+.tagline{
   text-align:center;
+  font-size:14px;
   color:#777;
-  margin:4px 0 20px
+  margin-bottom:25px;
+}
+
+h2{
+  text-align:center;
+  margin:0 0 20px;
+  font-size:22px;
+}
+
+.form-group{
+  margin-bottom:16px;
 }
 
 label{
-  font-weight:bold;
   display:block;
-  margin:12px 0 6px
+  font-weight:bold;
+  margin-bottom:6px;
+  font-size:14px;
 }
 
-input,select,textarea{
+input,
+textarea,
+select{
   width:100%;
-  box-sizing:border-box;
   padding:12px;
   border:1px solid #ccc;
-  border-radius:9px;
-  font-size:16px
+  border-radius:8px;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#8b5a2b;
 }
 
 textarea{
-  min-height:85px
+  min-height:90px;
+  resize:vertical;
 }
 
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px
+.required{
+  color:red;
 }
 
 button{
   width:100%;
   padding:14px;
   border:0;
-  border-radius:10px;
-  background:#222;
-  color:white;
+  border-radius:8px;
+  background:#8b5a2b;
+  color:#fff;
   font-size:17px;
   font-weight:bold;
-  margin-top:18px;
-  cursor:pointer
+  cursor:pointer;
+}
+
+button:hover{
+  background:#70451f;
 }
 
 button:disabled{
-  opacity:.6;
-  cursor:not-allowed
+  background:#999;
+  cursor:not-allowed;
 }
 
-.ok{
+.note{
+  margin-top:15px;
+  padding:12px;
+  background:#fff7ed;
+  border-radius:8px;
+  font-size:13px;
+  color:#666;
+  text-align:center;
+}
+
+.success{
   display:none;
   text-align:center;
-  padding:30px 5px
+  padding:30px 15px;
 }
 
-@media(max-width:520px){
-  .row{
-    grid-template-columns:1fr
+.success-icon{
+  font-size:55px;
+  margin-bottom:10px;
+}
+
+.success h2{
+  color:#2e7d32;
+  margin-bottom:10px;
+}
+
+.success p{
+  font-size:16px;
+  line-height:1.5;
+}
+
+.footer{
+  text-align:center;
+  margin-top:20px;
+  font-size:12px;
+  color:#888;
+}
+
+@media(max-width:600px){
+  body{
+    padding:10px;
+  }
+
+  .container{
+    padding:18px;
+  }
+
+  .logo{
+    font-size:24px;
   }
 }
 </style>
@@ -93,149 +164,263 @@ button:disabled{
 
 <body>
 
-<div class="box">
+<div class="container">
 
+  <div class="logo">
+    VIHU CREATIONS
+  </div>
+
+  <div class="tagline">
+    A Brand of Creativity
+  </div>
+
+  <!-- ADDRESS FORM -->
   <div id="fbox">
 
-    <div class="brand">VIHU CREATIONS</div>
-
-    <div class="tag">
-      A Brand of Creativity
-    </div>
+    <h2>Delivery Address</h2>
 
     <form id="f">
 
-      <label>Name *</label>
-      <input name="name" required>
+      <div class="form-group">
+        <label>
+          Name <span class="required">*</span>
+        </label>
 
-      <div class="row">
-
-        <div>
-          <label>Mobile Number *</label>
-          <input name="mobile" type="tel" required>
-        </div>
-
-        <div>
-          <label>Pincode *</label>
-          <input name="pincode" maxlength="6" required>
-        </div>
-
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter your full name"
+          required
+        >
       </div>
 
-      <label>House / Flat No. *</label>
-      <input name="houseFlat" required>
 
-      <label>Area / Colony *</label>
-      <input name="areaColony" required>
+      <div class="form-group">
+        <label>
+          Mobile Number <span class="required">*</span>
+        </label>
 
-      <label>Full Address *</label>
-      <textarea name="fullAddress" required></textarea>
-
-      <div class="row">
-
-        <div>
-          <label>City *</label>
-          <input name="city" required>
-        </div>
-
-        <div>
-          <label>State *</label>
-
-          <select name="state" required>
-
-            <option value="">Select</option>
-            <option>Madhya Pradesh</option>
-            <option>Rajasthan</option>
-            <option>Maharashtra</option>
-            <option>Gujarat</option>
-            <option>Delhi</option>
-            <option>Uttar Pradesh</option>
-            <option>Other</option>
-
-          </select>
-
-        </div>
-
+        <input
+          type="tel"
+          name="mobile"
+          placeholder="Enter 10 digit mobile number"
+          maxlength="10"
+          pattern="[0-9]{10}"
+          required
+        >
       </div>
 
-      <label>Landmark</label>
-      <input name="landmark">
 
-      <label>Special Delivery Instructions</label>
-      <textarea name="instructions"></textarea>
+      <div class="form-group">
+        <label>
+          House / Flat / Shop
+        </label>
 
-      <button id="b" type="submit">
+        <input
+          type="text"
+          name="houseFlat"
+          placeholder="House no., Flat no., Shop no."
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          Area / Colony <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="areaColony"
+          placeholder="Enter area / colony"
+          required
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          Full Address <span class="required">*</span>
+        </label>
+
+        <textarea
+          name="fullAddress"
+          placeholder="Enter complete delivery address"
+          required
+        ></textarea>
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          City <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="city"
+          placeholder="Enter city"
+          required
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          State <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="state"
+          placeholder="Enter state"
+          required
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          Pincode <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="pincode"
+          placeholder="Enter 6 digit pincode"
+          maxlength="6"
+          pattern="[0-9]{6}"
+          required
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          Landmark
+        </label>
+
+        <input
+          type="text"
+          name="landmark"
+          placeholder="Nearby landmark"
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label>
+          Delivery Instructions
+        </label>
+
+        <textarea
+          name="instructions"
+          placeholder="Any special delivery instructions"
+        ></textarea>
+      </div>
+
+
+      <button type="submit" id="b">
         Submit Address
       </button>
 
     </form>
 
+
+    <div class="note">
+      Please check your address and mobile number carefully before submitting.
+    </div>
+
   </div>
 
-  <div id="ok" class="ok">
 
-    <h2>✓ Address Submitted</h2>
+  <!-- SUCCESS MESSAGE -->
+  <div class="success" id="ok">
+
+    <div class="success-icon">
+      ✅
+    </div>
+
+    <h2>Address Submitted Successfully</h2>
 
     <p>
-      Thank you. Vihu Creations has received your details.
+      Thank you! Your delivery address has been received by
+      <b>VIHU CREATIONS</b>.
+    </p>
+
+    <p>
+      You may now close this page.
     </p>
 
   </div>
 
+
+  <div class="footer">
+    © VIHU CREATIONS
+  </div>
+
 </div>
+
+
+<!--
+  Hidden iframe.
+  Form data is submitted to Google Apps Script
+  without leaving this page.
+-->
+<iframe
+  name="hiddenSubmitFrame"
+  id="hiddenSubmitFrame"
+  style="display:none;width:0;height:0;border:0;">
+</iframe>
+
 
 <script>
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbzzNwe3PYbnRe8Gd0kMi7vkx49P5jZ4wy4_X5Xy8p8rUNg5jLQ24jw7Q4sG3eyQlswQ/exec";
 
-const form = document.getElementById("f");
-const button = document.getElementById("b");
-const formBox = document.getElementById("fbox");
-const successBox = document.getElementById("ok");
-
-form.addEventListener("submit", async function(e){
-
-  e.preventDefault();
-
-  <script>
-
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbzzNwe3PYbnRe8Gd0kMi7vkx49P5jZ4wy4_X5Xy8p8rUNg5jLQ24jw7Q4sG3eyQlswQ/exec";
 
 const form = document.getElementById("f");
 const button = document.getElementById("b");
 const formBox = document.getElementById("fbox");
 const successBox = document.getElementById("ok");
+
 
 form.addEventListener("submit", function(e){
 
   e.preventDefault();
 
+
+  /* Disable button */
   button.disabled = true;
   button.textContent = "Submitting...";
 
-  // Normal browser POST to Google Apps Script
+
+  /* Send form directly to Apps Script */
   form.action = WEB_APP_URL;
   form.method = "POST";
   form.target = "hiddenSubmitFrame";
 
+
+  /* Submit */
   form.submit();
 
-  // Show success after submission
+
+  /*
+    Give Apps Script time to receive the data,
+    then show success message.
+  */
   setTimeout(function(){
 
     formBox.style.display = "none";
     successBox.style.display = "block";
 
-  }, 1500);
+  },1500);
+
 
 });
 
 </script>
 
-<iframe
-  name="hiddenSubmitFrame"
-  id="hiddenSubmitFrame"
-  style="display:none;width:0;height:0;border:0;">
-</iframe>
+</body>
+</html>
