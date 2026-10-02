@@ -1,20 +1,436 @@
-function testAddressSave() {
-  const sheet = getAddressSheet();
+<!DOCTYPE html>
+<html lang="en">
 
-  const data = {
-    name: "TEST CLIENT",
-    mobile: "9999999999",
-    houseFlat: "TEST-1",
-    areaColony: "TEST AREA",
-    fullAddress: "TEST ADDRESS",
-    city: "RATLAM",
-    state: "Madhya Pradesh",
-    pincode: "457001",
-    landmark: "TEST LANDMARK",
-    instructions: "TEST INSTRUCTIONS"
-  };
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  sheet.appendRow(addressRow(data));
+<title>VIHU CREATIONS - Address Form</title>
 
-  return "TEST SAVED";
+<style>
+
+*{
+  box-sizing:border-box;
 }
+
+body{
+  margin:0;
+  padding:20px;
+  font-family:Arial,sans-serif;
+  background:#f4f4f4;
+  color:#222;
+}
+
+.container{
+  max-width:650px;
+  margin:auto;
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
+}
+
+.logo{
+  text-align:center;
+  font-size:28px;
+  font-weight:bold;
+  color:#8b5a2b;
+  margin-bottom:5px;
+}
+
+.tagline{
+  text-align:center;
+  font-size:14px;
+  color:#777;
+  margin-bottom:25px;
+}
+
+h2{
+  text-align:center;
+  margin:0 0 20px;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:6px;
+  font-size:14px;
+}
+
+.required{
+  color:red;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#8b5a2b;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:disabled{
+  background:#999;
+}
+
+.note{
+  margin-top:15px;
+  padding:12px;
+  background:#fff7ed;
+  border-radius:8px;
+  font-size:13px;
+  color:#666;
+  text-align:center;
+}
+
+.success{
+  display:none;
+  text-align:center;
+  padding:30px 15px;
+}
+
+.success-icon{
+  font-size:55px;
+}
+
+.success h2{
+  color:#2e7d32;
+}
+
+.footer{
+  text-align:center;
+  margin-top:20px;
+  font-size:12px;
+  color:#888;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <div class="logo">
+    VIHU CREATIONS
+  </div>
+
+  <div class="tagline">
+    A Brand of Creativity
+  </div>
+
+
+  <div id="fbox">
+
+    <h2>Delivery Address</h2>
+
+    <form
+      id="f"
+      method="POST"
+      target="addressSubmitFrame"
+    >
+
+      <input
+        type="hidden"
+        name="action"
+        value="saveAddress"
+      >
+
+
+      <div class="form-group">
+
+        <label>
+          Name <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="name"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Mobile Number <span class="required">*</span>
+        </label>
+
+        <input
+          type="tel"
+          name="mobile"
+          maxlength="10"
+          pattern="[0-9]{10}"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          House / Flat / Shop
+        </label>
+
+        <input
+          type="text"
+          name="houseFlat"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Area / Colony
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="areaColony"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Full Address
+          <span class="required">*</span>
+        </label>
+
+        <textarea
+          name="fullAddress"
+          required
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          City
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="city"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          State
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="state"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Pincode
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          name="pincode"
+          maxlength="6"
+          pattern="[0-9]{6}"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Landmark
+        </label>
+
+        <input
+          type="text"
+          name="landmark"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Delivery Instructions
+        </label>
+
+        <textarea
+          name="instructions"
+        ></textarea>
+
+      </div>
+
+
+      <button
+        type="submit"
+        id="b"
+      >
+        Submit Address
+      </button>
+
+    </form>
+
+
+    <div class="note">
+
+      Please check your address and mobile number
+      carefully before submitting.
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="success"
+    id="ok"
+  >
+
+    <div class="success-icon">
+      ✅
+    </div>
+
+    <h2>
+      Address Submitted Successfully
+    </h2>
+
+    <p>
+      Thank you! Your delivery address has been received by
+      <b>VIHU CREATIONS</b>.
+    </p>
+
+  </div>
+
+
+  <div class="footer">
+    © VIHU CREATIONS
+  </div>
+
+</div>
+
+
+<iframe
+  name="addressSubmitFrame"
+  id="addressSubmitFrame"
+  style="display:none;"
+></iframe>
+
+
+<script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbzzNwe3PYbnRe8Gd0kMi7vkx49P5jZ4wy4_X5Xy8p8rUNg5jLQ24jw7Q4sG3eyQlswQ/exec";
+
+
+const form =
+document.getElementById("f");
+
+const button =
+document.getElementById("b");
+
+const formBox =
+document.getElementById("fbox");
+
+const successBox =
+document.getElementById("ok");
+
+
+form.addEventListener(
+  "submit",
+  function(e){
+
+    e.preventDefault();
+
+    button.disabled = true;
+
+    button.textContent =
+      "Submitting...";
+
+
+    form.action =
+      WEB_APP_URL;
+
+    form.method =
+      "POST";
+
+    form.target =
+      "addressSubmitFrame";
+
+
+    form.submit();
+
+
+    setTimeout(
+      function(){
+
+        formBox.style.display =
+          "none";
+
+        successBox.style.display =
+          "block";
+
+      },
+      2000
+    );
+
+  }
+);
+
+</script>
+
+
+</body>
+</html>
